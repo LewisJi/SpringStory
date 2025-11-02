@@ -3,11 +3,15 @@ package com.Lewis.hello.controller;
 import com.Lewis.hello.domain.HelloReq;
 import com.Lewis.hello.domain.HelloRes;
 import com.Lewis.hello.service.HelloService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloController {
+
+    private static final Logger logger = LogManager.getLogger(HelloController.class);
 
     @Autowired
     private HelloService service;
@@ -26,6 +30,7 @@ public class HelloController {
 
     @GetMapping("/")
     public String getStart(){
+        logger.info("log4j is ready");
         return "Welcome to Story";
     }
 }
