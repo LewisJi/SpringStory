@@ -1,8 +1,8 @@
-package com.Lewis.hello.service;
+package com.Lewis.app.hello.service;
 
-import com.Lewis.hello.domain.HelloReq;
-import com.Lewis.hello.domain.HelloRes;
-import com.Lewis.hello.repository.HelloRepository;
+import com.Lewis.app.hello.domain.HelloReq;
+import com.Lewis.app.hello.domain.HelloRes;
+import com.Lewis.app.hello.repository.HelloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
