@@ -1,4 +1,4 @@
-package com.Lewis.hello.domain;
+package com.Lewis.app.hello.domain;
 
 public class HelloReq {
     private String name;
