@@ -1,4 +1,4 @@
-package com.Lewis.hello.repository;
+package com.Lewis.app.hello.repository;
 
 import org.springframework.stereotype.Repository;
 

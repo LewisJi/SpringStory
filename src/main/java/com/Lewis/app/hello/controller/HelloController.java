@@ -1,8 +1,8 @@
-package com.Lewis.hello.controller;
+package com.Lewis.app.hello.controller;
 
-import com.Lewis.hello.domain.HelloReq;
-import com.Lewis.hello.domain.HelloRes;
-import com.Lewis.hello.service.HelloService;
+import com.Lewis.app.hello.domain.HelloReq;
+import com.Lewis.app.hello.domain.HelloRes;
+import com.Lewis.app.hello.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
