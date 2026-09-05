@@ -28,4 +28,9 @@ public class HelloController {
     public String getStart(){
         return "Welcome to Story";
     }
+
+    @GetMapping("/queryStudent")
+    public HelloRes getStudent(){
+        return service.getStudent();
+    }
 }
