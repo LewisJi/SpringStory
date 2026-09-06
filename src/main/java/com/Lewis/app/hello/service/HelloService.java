@@ -28,12 +28,9 @@ public class HelloService {
 
     public HelloRes getStudent() {
         HelloRes rs = new HelloRes();
-        try {
-            String jsonResult = objectMapper.writeValueAsString(stRepos.findAllStudent());
-            rs.setResult(jsonResult);
-        } catch (Exception e) {
-            rs.setResult("[]");
-        }
+        rs.setResult(stRepos.findAllStudent());
+//        rs.setResult(stRepos.findAll());
+
         return rs;
     }
 }
