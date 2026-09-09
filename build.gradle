@@ -20,16 +20,23 @@ repositories {
 }
 
 dependencies {
+	// === Spring Boot 核心與 Web ===
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
 
+	// === 資料庫 (JPA & PostgreSQL) ===
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'org.postgresql:postgresql'
-	//runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	// runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+
+
+	// === Lombok 設定 ===
+	compileOnly 'org.projectlombok:lombok:1.18.36'
+	annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+	// === 測試相關 ===
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
