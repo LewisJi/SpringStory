@@ -29,6 +29,9 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	// runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 
+	// === API 文件 (Swagger / OpenAPI) ===
+	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
 
 	// === Lombok 設定 ===
 	compileOnly 'org.projectlombok:lombok:1.18.36'
@@ -37,6 +40,10 @@ dependencies {
 	// === 測試相關 ===
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	constraints {
+		implementation('org.apache.commons:commons-lang3:3.18.0')
+	}
 }
 
 tasks.named('test') {
