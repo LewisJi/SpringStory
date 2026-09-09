@@ -4,14 +4,16 @@ import javax.persistence.*;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 @Entity
 @Table(name = "student", schema = "test") // 指定資料表名稱與 test 綱要(Schema)
 @ApiModel("學生資料")
+@Data
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自動遞增 ID
+   // @GeneratedValue(strategy = GenerationType.IDENTITY) // 自動遞增 ID
     @ApiModelProperty(value = "編號")
     private Long id;
 
@@ -23,13 +25,4 @@ public class Student {
     @Column(name = "score")
     private Integer score;
 
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public Integer getScore() { return score; }
-    public void setScore(Integer score) { this.score = score; }
 }
