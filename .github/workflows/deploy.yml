@@ -14,12 +14,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 2. Grant execute permission for gradlew
+        working-directory: ./SpringStory
         run: chmod +x gradlew
 
       - name: 3. Build with Gradle
+        working-directory: ./SpringStory
         run: ./gradlew bootJar -x test
 
       - name: 4. Build Image and Run Container
+        working-directory: ./SpringStory
         run: |
           docker build -t springstory:latest .
           docker stop springstory || true
