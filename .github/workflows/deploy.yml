@@ -33,4 +33,7 @@ jobs:
             --name springstory \
             --restart unless-stopped \
             -p 8082:8080 \
+            -e pgreDB_user="lewis" \
+            -e pgreDB_pass="1111" \
             springstory:latest
+          
