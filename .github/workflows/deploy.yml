@@ -15,7 +15,7 @@ jobs:
 
       - name: 2. Build Image and Run Container
         run: |
-          docker build -f DockerFile -t springstory:latest .
+          docker build -f Dockerfile -t springstory:latest .
           docker stop springstory || true
           docker rm springstory || true
           docker run -d \
