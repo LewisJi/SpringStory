@@ -13,15 +13,29 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      - name: 2. Build Image and Run Container
+      - name: 2. Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: 3. High-speed Download Gradle 8.5
         run: |
-          docker build -f Dockerfile -t springstory:latest .
+          TARGET_DIR="gradle/wrapper/dists/gradle-8.5-bin/415b804562772579122368524888877"
+          mkdir -p "$TARGET_DIR"
+          wget -q --show-progress https://gradle.org -O "$TARGET_DIR/gradle-8.5-bin.zip"
+          touch "$TARGET_DIR/gradle-8.5-bin.zip.lck"
+          touch "$TARGET_DIR/gradle-8.5-bin.zip.ok"
+
+      - name: 4. Build with Gradle
+        run: ./gradlew bootJar -x test
+
+      - name: 5. Build Image and Run Container
+        run: |
+          docker build -f DockerFile -t springstory:latest .
           docker stop springstory || true
           docker rm springstory || true
           docker run -d \
             --name springstory \
             --restart unless-stopped \
             -p 8082:8080 \
-            -e pgreDB_user="lewis" \
-            -e pgreDB_pass="1111" \
+            -e pgreDB_user="${{ secrets.pgreDB_user }}" \
+            -e pgreDB_pass="${{ secrets.pgreDB_pass }}" \
             springstory:latest

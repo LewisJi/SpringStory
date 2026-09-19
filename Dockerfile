@@ -4,7 +4,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN chmod +x ./gradlew && ./gradlew bootJar -x test
+RUN chmod +x ./gradlew && ./gradlew bootJar -x test --no-daemon
 
 FROM eclipse-temurin:17-jdk
 
