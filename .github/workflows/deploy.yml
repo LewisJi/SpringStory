@@ -13,13 +13,18 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      - name: 2. Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: wrapper
-
-      - name: 3. Grant execute permission for gradlew
+      - name: 2. Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: 3. High-speed Download and Cache Gradle 9.6.0
+        run: |
+          TARGET_DIR="$HOME/.gradle/wrapper/dists/gradle-9.6.0-bin/3f750f03d77e42327c5f9fcb9992110088330a32"
+          mkdir -p "$TARGET_DIR"
+          
+          wget -q --show-progress https://gradle.org -O "$TARGET_DIR/gradle-9.6.0-bin.zip"
+          
+          touch "$TARGET_DIR/gradle-9.6.0-bin.zip.lck"
+          touch "$TARGET_DIR/gradle-9.6.0-bin.zip.ok"
 
       - name: 4. Build with Gradle
         run: ./gradlew bootJar -x test
@@ -36,4 +41,3 @@ jobs:
             -e pgreDB_user="lewis" \
             -e pgreDB_pass="1111" \
             springstory:latest
-          
