@@ -13,22 +13,23 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      - name: 2. Grant execute permission for gradlew
+      - name: 2. Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: 3. Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: 3. Build with Gradle
+      - name: 4. Build with Gradle
         run: ./gradlew bootJar -x test
 
-      - name: 4. Build Image and Run Container
+      - name: 5. Build Image and Run Container
         run: |
-          # 1. 將打包好的 JAR 檔與 Dockerfile 編譯成當地 Image
           docker build -t springstory:latest .
-          
-          # 2. 如果舊的容器存在，先停止並刪除
           docker stop springstory || true
           docker rm springstory || true
-          
-          # 3. 啟動全新的容器
           docker run -d \
             --name springstory \
             --restart unless-stopped \
