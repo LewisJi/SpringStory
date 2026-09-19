@@ -16,15 +16,15 @@ jobs:
       - name: 2. Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: 3. High-speed Download and Cache Gradle 9.6.0
+      - name: 3. High-speed Download and Cache Gradle 8.5
         run: |
-          TARGET_DIR="$HOME/.gradle/wrapper/dists/gradle-9.6.0-bin/3f750f03d77e42327c5f9fcb9992110088330a32"
+          TARGET_DIR="$HOME/.gradle/wrapper/dists/gradle-8.5-bin/415b804562772579122368524888877"
           mkdir -p "$TARGET_DIR"
           
-          wget -q --show-progress https://gradle.org -O "$TARGET_DIR/gradle-9.6.0-bin.zip"
+          wget -q --show-progress https://gradle.org -O "$TARGET_DIR/gradle-8.5-bin.zip"
           
-          touch "$TARGET_DIR/gradle-9.6.0-bin.zip.lck"
-          touch "$TARGET_DIR/gradle-9.6.0-bin.zip.ok"
+          touch "$TARGET_DIR/gradle-8.5-bin.zip.lck"
+          touch "$TARGET_DIR/gradle-8.5-bin.zip.ok"
 
       - name: 4. Build with Gradle
         run: ./gradlew bootJar -x test
