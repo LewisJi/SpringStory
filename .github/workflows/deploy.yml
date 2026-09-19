@@ -13,14 +13,21 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      - name: 2. List all files to check structure
-        run: |
-          echo "=== Current working directory ==="
-          pwd
-          echo "=== Listing top-level files ==="
-          ls -la
-          echo "=== Searching for gradlew location ==="
-          find . -name "gradlew"
+      # 💡 直接在當前根目錄給予 gradlew 執行權限
+      - name: 2. Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-      - name: 3. Grant execute permission for gradlew (Temp fallback)
-        run: echo "Waiting for file structure log..."
+      - name: 3. Build with Gradle
+        run: ./gradlew bootJar -x test
+
+      - name: 4. Build Image and Run Container
+        run: |
+          docker build -t springstory:latest .
+          docker stop springstory || true
+          docker rm springstory || true
+          docker run -d \
+            --name springstory \
+            --restart unless-stopped \
+            --network app-1_default \
+            -p 8082:8080 \
+            springstory:latest
