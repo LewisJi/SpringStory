@@ -16,21 +16,10 @@ jobs:
       - name: 2. Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: 3. Rebuild missing gradle wrapper folder and files
-        run: |
-          mkdir -p gradle/wrapper
-          
-          echo "distributionBase=GRADLE_USER_HOME" > gradle/wrapper/gradle-wrapper.properties
-          echo "distributionPath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
-          echo "distributionUrl=https\://services.gradle.org/distributions/gradle-7.6-bin.zip" >> gradle/wrapper/gradle-wrapper.properties
-          echo "zipStoreBase=GRADLE_USER_HOME" >> gradle/wrapper/gradle-wrapper.properties
-          echo "zipStorePath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
-          curl -sL https://githubusercontent.com -o gradle/wrapper/gradle-wrapper.jar
-
-      - name: 4. Build with Gradle
+      - name: 3. Build with Gradle
         run: ./gradlew bootJar -x test
 
-      - name: 5. Build Image and Run Container
+      - name: 4. Build Image and Run Container
         run: |
           docker build -t springstory:latest .
           docker stop springstory || true
