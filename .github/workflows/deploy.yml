@@ -13,15 +13,19 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      # 💡 直接在當前根目錄給予 gradlew 執行權限
       - name: 2. Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: |
+          cd ..
+          chmod +x ./SpringStory/gradlew      
 
       - name: 3. Build with Gradle
-        run: ./gradlew bootJar -x test
+        run: |
+          cd ..
+          ./SpringStory/gradlew -p ./SpringStory bootJar -x test  
 
       - name: 4. Build Image and Run Container
         run: |
+          cd ../SpringStory
           docker build -t springstory:latest .
           docker stop springstory || true
           docker rm springstory || true
