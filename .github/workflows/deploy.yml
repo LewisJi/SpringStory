@@ -17,12 +17,15 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
+          cache-disabled: true
 
       - name: 3. Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: 4. Build with Gradle
-        run: ./gradlew bootJar -x test
+        env:
+          GRADLE_USER_HOME: ${{ github.workspace }}/../.gradle
+        run: ./gradlew bootJar -x test --no-daemon --build-cache
 
       - name: 5. Build Image and Run Container
         run: |
