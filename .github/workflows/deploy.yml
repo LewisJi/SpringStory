@@ -13,13 +13,18 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      - name: 2. Grant execute permission for gradlew
+      - name: 2. Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: wrapper
+
+      - name: 3. Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: 3. Build with Gradle
+      - name: 4. Build with Gradle
         run: ./gradlew bootJar -x test
 
-      - name: 4. Build Image and Run Container
+      - name: 5. Build Image and Run Container
         run: |
           docker build -t springstory:latest .
           docker stop springstory || true
