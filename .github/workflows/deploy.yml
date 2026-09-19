@@ -17,24 +17,20 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          cache-disabled: true
 
       - name: 3. Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: 4. Build with Gradle
-        env:
-          GRADLE_USER_HOME: ${{ github.workspace }}/../.gradle
-        run: ./gradlew bootJar -x test --no-daemon --build-cache
+        run: ./gradlew bootJar -x test
 
       - name: 5. Build Image and Run Container
         run: |
-          docker build -t springstory:latest .
+          docker build -f DockerFile -t springstory:latest .
           docker stop springstory || true
           docker rm springstory || true
           docker run -d \
             --name springstory \
             --restart unless-stopped \
-            --network app-1_default \
             -p 8082:8080 \
             springstory:latest
