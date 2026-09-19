@@ -13,18 +13,6 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      - name: 1.5 Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'gradle'
-
-      - name: 1.6 Build with Gradle
-        run: |
-          chmod +x ./gradlew
-          ./gradlew bootJar -x test --no-daemon
-
       - name: 2. Build Image and Run Container
         run: |
           docker build -f Dockerfile -t springstory:latest .
