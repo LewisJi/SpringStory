@@ -13,10 +13,9 @@ jobs:
       - name: 1. Checkout repository code
         uses: actions/checkout@v4
 
-      #./gradlew change to gradlew, because script install gradle ready
+      #./gradlew change to gradlew, because script install gradle ready, 並移除chmod +x ./gradlew
       - name: 2. Build Jar
         run: |
-          chmod +x ./gradlew
           gradlew bootJar -x test --no-daemon 
 
       - name: 3. Build Image and Run Container
